@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {HeroComponent} from '../hero/hero.component';
 
 @Component({
@@ -11,5 +11,7 @@ import {HeroComponent} from '../hero/hero.component';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  @Input()
+  color : string = 'violet';
 
 }
