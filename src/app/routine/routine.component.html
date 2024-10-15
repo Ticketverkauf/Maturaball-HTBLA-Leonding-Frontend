@@ -9,7 +9,7 @@
   @for (routine of routines; track $index){
     <div class="routine w-full p-2.5 flex text-xl justify-center items-center flex-col">
       <p class="text-{{color}}-600">{{routine.time.getHours().toString().padStart(2,'0')}}:{{routine.time.getMinutes().toString().padStart(2,'0')}}</p>
-      <p>{{routine.name}}</p>
+      <p class="text-center">{{routine.name}}</p>
     </div>
   }
 </div>
