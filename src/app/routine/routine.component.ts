@@ -25,5 +25,4 @@ export class RoutineComponent {
     {name: 'Ende des Maturaballs', time: new Date(new Date().setHours(1, 0, 0, 0))},
     {name: 'Afterparty', time: new Date(new Date().setHours(2, 0, 0, 0))}
   ];
-  protected readonly window = window;
 }
