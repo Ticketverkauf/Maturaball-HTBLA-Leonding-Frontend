@@ -16,4 +16,5 @@ export class HeroComponent {
 
   @Input()
   accentColor: string = 'yellow';
+  protected readonly window = window;
 }

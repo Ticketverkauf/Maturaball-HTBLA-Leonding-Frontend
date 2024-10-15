@@ -1,4 +1,12 @@
-<div class="flex justify-center items-center w-full h-[75vh]">
+<div class="justify-center items-center h-[75vh] w-full flex fixed">
   <app-hero [color]="color"/>
 </div>
 
+<div class="relative w-full top-[75vh]">
+  <div class="relative">
+    <app-pointer-arrow [isActive]="arrowActive" />
+  </div>
+  <div>
+    <app-routine [color]="color"/>
+  </div>
+</div>
