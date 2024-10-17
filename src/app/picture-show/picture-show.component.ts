@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-picture-show',
@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './picture-show.component.css'
 })
 export class PictureShowComponent {
+  @Input()
+  color: string = 'violet';
 
 }
