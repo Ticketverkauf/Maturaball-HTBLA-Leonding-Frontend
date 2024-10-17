@@ -2,11 +2,14 @@
   <app-hero [color]="color"/>
 </div>
 
-<div class="relative top-[75vh]">
+<div class="relative top-[75vh] flex flex-col gap-5">
   <div class="relative">
     <app-pointer-arrow [isActive]="arrowActive" />
   </div>
   <div>
     <app-routine [color]="color"/>
+  </div>
+  <div>
+    <app-picture-show />
   </div>
 </div>
