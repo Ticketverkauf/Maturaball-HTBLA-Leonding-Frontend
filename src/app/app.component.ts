@@ -13,5 +13,4 @@ import {PopupTesterComponent} from './popup-tester/popup-tester.component';
 })
 export class AppComponent {
   title = 'frontend';
-
 }

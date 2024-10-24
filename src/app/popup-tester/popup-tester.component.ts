@@ -1,15 +1,11 @@
-import {ChangeDetectionStrategy, Component, inject, model, signal} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import {Component, inject, model, signal} from '@angular/core';
 import {PopupComponent} from '../popup/popup.component';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-popup-tester',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
+  imports: [],
   templateUrl: './popup-tester.component.html',
   styleUrl: './popup-tester.component.css'
 })
