@@ -7,17 +7,9 @@
   </div>
 
   <div class="h-[50vh] relative flex flex-row gap-5 justify-evenly items-center">
-    <div class="h-3/4 aspect-square overflow-hidden rounded-xl border-{{color}}-600 border-2">
-      <img src="1.jpeg" alt="picture" class="h-full w-full">
-    </div>
-    <div class="h-3/4 aspect-square overflow-hidden rounded-xl border-{{color}}-600 border-2">
-      <img src="4.png" alt="picture" class="h-full w-full">
-    </div>
-    <div class="h-3/4 aspect-square overflow-hidden rounded-xl border-{{color}}-600 border-2">
-      <img src="3.webp" alt="picture" class="h-full w-full">
-    </div>
-    <div class="h-3/4 aspect-square overflow-hidden rounded-xl border-{{color}}-600 border-2">
-      <img src="5.jpg" alt="picture" class="h-full w-full">
-    </div>
+    <app-picture-frame [url]="'1.jpeg'" />
+    <app-picture-frame [url]="'5.jpg'" />
+    <app-picture-frame [url]="'3.webp'" />
+    <app-picture-frame [url]="'4.png'" />
   </div>
 </div>

@@ -1,9 +1,12 @@
 import {Component, Input} from '@angular/core';
+import {PictureFrameComponent} from '../picture-frame/picture-frame.component';
 
 @Component({
   selector: 'app-picture-show',
   standalone: true,
-  imports: [],
+  imports: [
+    PictureFrameComponent
+  ],
   templateUrl: './picture-show.component.html',
   styleUrl: './picture-show.component.css'
 })
