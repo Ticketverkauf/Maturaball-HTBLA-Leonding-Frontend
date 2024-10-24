@@ -1,4 +1,6 @@
-import {Component, Input, input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
+import {PopupComponent} from '../popup/popup.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-button',
@@ -19,4 +21,20 @@ export class ButtonComponent {
 
   @Input()
   color :string = 'violet';
+
+
+
+  readonly dialog = inject(MatDialog);
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        console.log(result);
+      }
+    });
+  }
 }
