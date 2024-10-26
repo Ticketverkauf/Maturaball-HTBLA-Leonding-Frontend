@@ -22,15 +22,7 @@ export interface DialogData {
   selector: 'app-popup',
   standalone: true,
   imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
+   FormsModule,
   ],
   templateUrl: './popup.component.html',
   styleUrl: './popup.component.css'

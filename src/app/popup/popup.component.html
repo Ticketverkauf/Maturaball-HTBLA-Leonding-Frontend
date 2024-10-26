@@ -2,29 +2,27 @@
 
 <div class="flex justify-end items-start absolute top-0 right-0 p-6">
   @for (step of [1, 2, 3, 4, 5]; track step) {
-    <button 
-      (click)="setStep(step)" 
-      [ngClass]="{
+  <button (click)="setStep(step)" [class]="{
         'bg-violet-500': currentStep === step,
         'bg-violet-300': currentStep !== step
-      }"
-      class="text-white rounded-full mr-1 w-10 h-10 flex items-center justify-center"
-    >
-      {{ step }}
-    </button>
+      }" class="text-white rounded-full mr-1 w-10 h-10 flex items-center justify-center">
+    {{ step }}
+  </button>
   }
 </div>
 
-<div class="p-6 grid grid-cols-2 gap-4 
+<div
+  class="p-6 grid grid-cols-2 gap-4 
 [&_p]:text-violet-600 
 [&_div]:p-1 [&_div]:full-width 
 [&_input]:w-full [&_input]:p-3 [&_input]:rounded-md [&_input]:placeholder-violet-600 [&_input]:bg-violet-100 [&_input]:border [&_input]:border-violet-300 [&_input]:focus:outline-none [&_input]:focus:ring-2 [&_input]:focus:ring-violet-500">
 
   <ng-container>
-  @if (currentStep === 1) {
+    @switch (currentStep) {
+    @case (1) {
     <div>
       <p>Vorname</p>
-      <input [(ngModel)]="formData.vorname" placeholder="Max"/>
+      <input [(ngModel)]="formData.vorname" placeholder="Max" />
     </div>
     <div>
       <p>Nachname</p>
@@ -58,17 +56,17 @@
       <p>Klasse (optional)</p>
       <input [(ngModel)]="formData.klasse" placeholder="4AHIF" />
     </div>
-  }
+    }
 
-  @if (currentStep === 2) {
+    @case (2) {
     <div>
       <p>Test seite 2</p>
       <input placeholder="Test" />
     </div>
-    <img src="zuckerberg.webp" alt="ticket"/>
-  }
+    <img src="zuckerberg.webp" alt="ticket" />
+    }
 
-  @if (currentStep === 3) {
+    @case (3) {
     <div>
       <p>Test seite 3</p>
       <input placeholder="Test" />
@@ -81,9 +79,9 @@
       <p>Test seite 3</p>
       <input placeholder="Test" />
     </div>
-  }
+    }
 
-  @if (currentStep === 4) {
+    @case (4) {
     <div>
       <p>Test seite 4</p>
       <input placeholder="Test" />
@@ -96,9 +94,9 @@
       <p>Test seite 4</p>
       <input placeholder="Test" />
     </div>
-  }
+    }
 
-  @if (currentStep === 5) {
+    @case (5) {
     <div>
       <p>Test seite 5</p>
       <input placeholder="Test" />
@@ -111,12 +109,14 @@
       <p>Test seite 5</p>
       <input placeholder="Test" />
     </div>
-  }
-  </ng-container>
-</div>
+    }
+    @default {
+    <p>Invalid step</p>
+    }
+    }
 
-<div class="flex justify-between items-start bottom-0 left-0 right-0 p-6
+    <div class="flex justify-between items-start bottom-0 left-0 right-0 p-6
 [&_button]:bg-violet-600 [&_button]:text-white [&_button]:rounded-md [&_button]:p-3">
-  <button (click)="close()">Close</button>
-  <button (click)="continue()">Continue</button>
-</div>
+      <button (click)="close()">Close</button>
+      <button (click)="continue()">Continue</button>
+    </div>
