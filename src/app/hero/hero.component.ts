@@ -22,6 +22,6 @@ export class HeroComponent {
   readonly dialogService = inject(DialogService);
 
   openDialog(): void {
-    this.dialogService.openDialog(PopupComponent, '60vh', '70vw', true);
+    this.dialogService.openDialog(PopupComponent, '80vh', '90vw', true);
   }
 }

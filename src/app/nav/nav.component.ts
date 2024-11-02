@@ -24,6 +24,6 @@ export class NavComponent {
   readonly dialog = inject(MatDialog);
 
   openDialog(): void {
-    this.dialogService.openDialog(PopupComponent, '400px', '600px', true);
+    this.dialogService.openDialog(PopupComponent, '80vh', '90vw', true);
   }
 }
