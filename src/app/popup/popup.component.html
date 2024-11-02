@@ -1,5 +1,5 @@
 <div
-  class="p-5 dark:bg-gray-800 h-full w-full rounded-2xl border-2 border-gray-500 text-gray-50 flex flex-col justify-between items-center">
+  class="p-5bg-gray-200 bg-gray-200 h-full w-full rounded-2xl border-2 border-gray-500 text-gray-900 flex flex-col justify-between items-center">
 
   <h2 class="p-6 text-3xl font-bold">Buy Ticket</h2>
 
@@ -15,49 +15,56 @@
   </div>
 
   <div
-    class="p-6 grid grid-cols-2 gap-4 
-  [&_p]:text-violet-600 
+    class="p-6 flex flex-col
+  [&_p]:text-gray-700 
     [&_div]:p-1 [&_div]:full-width 
     [&_input]:w-full [&_input]:p-3 [&_input]:rounded-md [&_input]:placeholder-violet-600 [&_input]:bg-violet-100 [&_input]:border [&_input]:border-violet-300 [&_input]:focus:outline-none [&_input]:focus:ring-2 [&_input]:focus:ring-violet-500">
 
-    <div>
+    <div class="info-grid">
       @switch (currentStep) {
       @case (1) {
-      <div>
-        <p>Vorname</p>
+      <div id="name">
+        <p>Vorname*</p>
         <input [(ngModel)]="formData.vorname" placeholder="Max" />
       </div>
-      <div>
-        <p>Nachname</p>
+      <div id="last-name">
+        <p>Nachname*</p>
         <input [(ngModel)]="formData.nachname" placeholder="Mustermann" />
       </div>
-      <div>
-        <p>email</p>
+      <div id="mail">
+        <p>Email-Addresse*</p>
         <input [(ngModel)]="formData.email" placeholder="max.m@gmail.com" />
       </div>
-      <div>
-        <p>Telefonnummer</p>
+      <div id="phone">
+        <p>Telefonnummer*</p>
         <input [(ngModel)]="formData.telefonnummer" placeholder="+43 999999999" />
       </div>
-      <div>
-        <p>Straße</p>
+      <div id="street">
+        <p>Straße*</p>
         <input [(ngModel)]="formData.strasse" placeholder="Limesstraße" />
       </div>
-      <div>
-        <p>Nummer</p>
+      <div id="s-number">
+        <p>Hausnummer*</p>
         <input [(ngModel)]="formData.nummer" placeholder="12-14a" />
       </div>
-      <div>
-        <p>PLZ</p>
+      <div id="zip">
+        <p>PLZ*</p>
         <input [(ngModel)]="formData.plz" placeholder="4050" />
       </div>
-      <div>
-        <p>Stadt</p>
+      <div id="city">
+        <p>Stadt*</p>
         <input [(ngModel)]="formData.stadt" placeholder="Linz" />
       </div>
-      <div>
+      <div id="student">
+        <p>Schüler</p>
+        <input
+          class="flex justify-center items-center w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+          [(ngModel)]="isSchueler" type="checkbox" />
+      </div>
+      <div id="group">
         <p>Klasse (optional)</p>
-        <input [(ngModel)]="formData.klasse" placeholder="4AHIF" />
+        <input [disabled]="!isSchueler()" [(ngModel)]="formData.klasse" placeholder="4AHIF"
+          class=" disabled:bg-gray-300 transition-all duration-300 ease-in-out" />
       </div>
       }
 

@@ -1,4 +1,4 @@
-import {Component, inject, model} from '@angular/core';
+import {Component, inject, model, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {
   MatDialogRef,
@@ -20,6 +20,8 @@ export interface DialogData {
 })
 export class PopupComponent {
   constructor(public dialogRef: MatDialogRef<PopupComponent>){}
+
+  isSchueler = signal<boolean>(false);
 
   formData = {
     vorname: '',
