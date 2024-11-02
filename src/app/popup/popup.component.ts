@@ -1,18 +1,9 @@
-import {ChangeDetectionStrategy, Component, inject, model, signal} from '@angular/core';
+import {Component, inject, model} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
 import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
   MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-
+}
+from '@angular/material/dialog';
 export interface DialogData {
   animal: string;
   name: string;
@@ -28,9 +19,8 @@ export interface DialogData {
   styleUrl: './popup.component.css'
 })
 export class PopupComponent {
-  readonly dialogRef = inject(MatDialogRef<PopupComponent>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
-  readonly animal = model(this.data.animal);
+  constructor(public dialogRef: MatDialogRef<PopupComponent>){}
+
   formData = {
     vorname: '',
     nachname: '',
@@ -44,22 +34,18 @@ export class PopupComponent {
   };
   currentStep: number = 1;
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  continue() {
+    this.currentStep++;
+    if(this.currentStep > 5) {
+      this.onClose();
+    }
   }
 
   setStep(step: number) {
     this.currentStep = step;
   }
 
-  continue() {
-    this.currentStep++;
-    if(this.currentStep > 5) {
-      this.close();
-    }
-  }
-
-  close() {
+  onClose() {
     this.dialogRef.close();
   }
 }

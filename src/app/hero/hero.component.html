@@ -7,9 +7,10 @@
 <div id="headline" class="flex justify-center items-center flex-col w-full gap-10">
   <div class="flex items-start max-sm:items-center flex-col justify-center w-full max-sm:w-2/3 gap-2.5 group">
     <p id="topic" class="text-{{color}}-600 text-2xl max-sm:text-lg">Royale-Rumble</p>
-    <h1 id="desc" class="tracking-wide text-5xl font-semibold max-sm:text-4xl max-sm:text-center">5 Jahre Durchgeboxt</h1>
+    <h1 id="desc" class="tracking-wide text-5xl font-semibold max-sm:text-4xl max-sm:text-center">5 Jahre Durchgeboxt
+    </h1>
     <span id="separator-line"
-          class="transition-all duration-300 ease-in-out w-5/6 h-1 bg-{{color}}-700 rounded max-sm:w-full group-hover:w-full"></span>
+      class="transition-all duration-300 ease-in-out w-5/6 h-1 bg-{{color}}-700 rounded max-sm:w-full group-hover:w-full"></span>
   </div>
-  <app-button name="Ballkarten Kaufen" [color]="color"></app-button>
+  <app-button name="Ballkarten Kaufen" [color]="color" (action)="openDialog()"></app-button>
 </div>

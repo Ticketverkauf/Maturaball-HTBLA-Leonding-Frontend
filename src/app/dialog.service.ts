@@ -5,13 +5,14 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
   providedIn: 'root'
 })
 export class DialogService {
-  readonly dialog = inject(MatDialog);
+  constructor(public dialog: MatDialog) { }
 
   openDialog(component: any, height: string, width: string, hasBackdrop: boolean) {
     const dialogConfig: MatDialogConfig = {
       height: height,
       width: width,
-      backdropClass: 'dialog-backdrop',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
       hasBackdrop: hasBackdrop,
     };
     this.dialog.open(component, dialogConfig);

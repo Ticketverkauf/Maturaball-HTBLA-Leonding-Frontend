@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {NavComponent} from './nav/nav.component';
 import {PopupComponent} from './popup/popup.component';
+import { DialogService } from './dialog.service';
 
 @Component({
   selector: 'app-root',
