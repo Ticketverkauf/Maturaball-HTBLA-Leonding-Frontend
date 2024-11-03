@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, model, signal} from '@angular/core';
+import {Component, inject, model, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {CommonModule, NgIf} from '@angular/common';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -23,9 +23,10 @@ export interface DialogData {
 })
 
 export class PopupComponent {
-  readonly dialogRef = inject(MatDialogRef<PopupComponent>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
-  readonly animal = model(this.data.animal);
+  constructor(public dialogRef: MatDialogRef<PopupComponent>){}
+
+  isSchueler = signal<boolean>(false);
+
   formData = {
     vorname: '',
     nachname: '',
@@ -49,22 +50,18 @@ export class PopupComponent {
 
   currentStep: number = 1;
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  continue() {
+    this.currentStep++;
+    if(this.currentStep > 5) {
+      this.onClose();
+    }
   }
 
   setStep(step: number) {
     this.currentStep = step;
   }
 
-  continue() {
-    this.currentStep++;
-    if(this.currentStep > 5) {
-      this.close();
-    }
-  }
-
-  close() {
+  onClose() {
     this.dialogRef.close();
   }
 }

@@ -1,0 +1,51 @@
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  margin-top: 10px;
+  grid-template-areas:
+    "info1 info2"
+    "info3 info4"
+    "info5 info6"
+    "info7 info8"
+    "info9 info10";
+}
+
+#name {
+  grid-area: info1;
+}
+
+#last-name {
+  grid-area: info2;
+}
+
+#mail {
+  grid-area: info3;
+}
+
+#phone {
+  grid-area: info4;
+}
+#street {
+  grid-area: info5;
+}
+
+#s-number {
+  grid-area: info6;
+}
+
+#city {
+  grid-area: info7;
+}
+
+#student {
+  grid-area: info9;
+}
+
+#zip {
+  grid-area: info8;
+}
+
+#group {
+  grid-area: info10;
+}

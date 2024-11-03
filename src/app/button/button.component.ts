@@ -1,6 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
-import {PopupComponent} from '../popup/popup.component';
-import {MatDialog} from '@angular/material/dialog';
+import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -13,28 +11,12 @@ export class ButtonComponent {
   @Input()
   name :string = "";
 
-  @Input()
-  action :() => void = () => {};
+  @Output()
+  action :EventEmitter<void> = new EventEmitter<void>();
 
   @Input()
   size: {height: string, width: string} = {height: '2.5rem', width: 'auto'};
 
   @Input()
   color :string = 'violet';
-
-
-
-  readonly dialog = inject(MatDialog);
-  openDialog(): void {
-    const dialogRef = this.dialog.open(PopupComponent, {
-      data: {},
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        console.log(result);
-      }
-    });
-  }
 }

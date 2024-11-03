@@ -1,102 +1,110 @@
-<h2 class="p-6 text-3xl font-bold">Buy Ticket</h2>
+<div
+  class="p-5bg-gray-200 bg-gray-200 h-full w-full rounded-2xl border-2 border-gray-500 text-gray-900 flex flex-col justify-between items-center">
 
-<div class="flex justify-end items-start absolute top-0 right-0 p-6">
-  @for (step of [1, 2, 3, 4, 5]; track step) {
-    <button 
-      (click)="setStep(step)" 
-      [ngClass]="{
+  <h2 class="p-6 text-3xl font-bold">Buy Ticket</h2>
+
+  <div class="flex justify-end items-start absolute top-0 right-0 p-6">
+    @for (step of [1, 2, 3, 4, 5]; track step) {
+    <button (click)="setStep(step)" [class]="{
         'bg-violet-500': currentStep === step,
         'bg-violet-300': currentStep !== step
-      }"
-      class="text-white rounded-full mr-1 w-10 h-10 flex items-center justify-center"
-    >
+      }" class="text-white rounded-full mr-1 w-10 h-10 flex items-center justify-center">
       {{ step }}
     </button>
-  }
-</div>
+    }
+  </div>
 
-<div class="p-6 grid grid-cols-2 gap-4 
-[&_p]:text-violet-600 
-[&_div]:p-1 [&_div]:full-width 
-[&_input]:w-full [&_input]:p-3 [&_input]:rounded-md [&_input]:placeholder-violet-600 [&_input]:bg-violet-100 [&_input]:border [&_input]:border-violet-300 [&_input]:focus:outline-none [&_input]:focus:ring-2 [&_input]:focus:ring-violet-500">
+  <div
+    class="p-6 flex flex-col
+  [&_p]:text-gray-700 
+    [&_div]:p-1 [&_div]:full-width 
+    [&_input]:w-full [&_input]:p-3 [&_input]:rounded-md [&_input]:placeholder-violet-600 [&_input]:bg-violet-100 [&_input]:border [&_input]:border-violet-300 [&_input]:focus:outline-none [&_input]:focus:ring-2 [&_input]:focus:ring-violet-500">
 
-  <ng-container>
-  @if (currentStep === 1) {
-    <div>
-      <p>Vorname</p>
-      <input [(ngModel)]="formData.vorname" placeholder="Max"/>
-    </div>
-    <div>
-      <p>Nachname</p>
-      <input [(ngModel)]="formData.nachname" placeholder="Mustermann" />
-    </div>
-    <div>
-      <p>email</p>
-      <input [(ngModel)]="formData.email" placeholder="max.m@gmail.com" />
-    </div>
-    <div>
-      <p>Telefonnummer</p>
-      <input [(ngModel)]="formData.telefonnummer" placeholder="+43 999999999" />
-    </div>
-    <div>
-      <p>Straße</p>
-      <input [(ngModel)]="formData.strasse" placeholder="Limesstraße" />
-    </div>
-    <div>
-      <p>Nummer</p>
-      <input [(ngModel)]="formData.nummer" placeholder="12-14a" />
-    </div>
-    <div>
-      <p>PLZ</p>
-      <input [(ngModel)]="formData.plz" placeholder="4050" />
-    </div>
-    <div>
-      <p>Stadt</p>
-      <input [(ngModel)]="formData.stadt" placeholder="Linz" />
-    </div>
-    <div>
-      <p>Klasse (optional)</p>
-      <input [(ngModel)]="formData.klasse" placeholder="4AHIF" />
-    </div>
-  }
+    <div class="info-grid">
+      @switch (currentStep) {
+      @case (1) {
+      <div id="name">
+        <p>Vorname*</p>
+        <input [(ngModel)]="formData.vorname" placeholder="Max" />
+      </div>
+      <div id="last-name">
+        <p>Nachname*</p>
+        <input [(ngModel)]="formData.nachname" placeholder="Mustermann" />
+      </div>
+      <div id="mail">
+        <p>Email-Addresse*</p>
+        <input [(ngModel)]="formData.email" placeholder="max.m@gmail.com" />
+      </div>
+      <div id="phone">
+        <p>Telefonnummer*</p>
+        <input [(ngModel)]="formData.telefonnummer" placeholder="+43 999999999" />
+      </div>
+      <div id="street">
+        <p>Straße*</p>
+        <input [(ngModel)]="formData.strasse" placeholder="Limesstraße" />
+      </div>
+      <div id="s-number">
+        <p>Hausnummer*</p>
+        <input [(ngModel)]="formData.nummer" placeholder="12-14a" />
+      </div>
+      <div id="zip">
+        <p>PLZ*</p>
+        <input [(ngModel)]="formData.plz" placeholder="4050" />
+      </div>
+      <div id="city">
+        <p>Stadt*</p>
+        <input [(ngModel)]="formData.stadt" placeholder="Linz" />
+      </div>
+      <div id="student">
+        <p>Schüler</p>
+        <input
+          class="flex justify-center items-center w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+          [(ngModel)]="isSchueler" type="checkbox" />
+      </div>
+      <div id="group">
+        <p>Klasse (optional)</p>
+        <input [disabled]="!isSchueler()" [(ngModel)]="formData.klasse" placeholder="4AHIF"
+          class=" disabled:bg-gray-300 transition-all duration-300 ease-in-out" />
+      </div>
+      }
 
-  @if (currentStep === 2) {
-    <div>
-      <p>Test seite 2</p>
-      <input placeholder="Test" />
-    </div>
-    <img src="zuckerberg.webp" alt="ticket"/>
-  }
+      @case (2) {
+      <div>
+        <p>Test seite 2</p>
+        <input placeholder="Test" />
+      </div>
+      <img src="zuckerberg.webp" alt="ticket" />
+      }
 
-  @if (currentStep === 3) {
-    <div>
-      <p>Test seite 3</p>
-      <input placeholder="Test" />
-    </div>
-    <div>
-      <p>Test seite 3</p>
-      <input placeholder="Test" />
-    </div>
-    <div>
-      <p>Test seite 3</p>
-      <input placeholder="Test" />
-    </div>
-  }
+      @case (3) {
+      <div>
+        <p>Test seite 3</p>
+        <input placeholder="Test" />
+      </div>
+      <div>
+        <p>Test seite 3</p>
+        <input placeholder="Test" />
+      </div>
+      <div>
+        <p>Test seite 3</p>
+        <input placeholder="Test" />
+      </div>
+      }
 
-  @if (currentStep === 4) {
-    <div>
-      <p>Test seite 4</p>
-      <input placeholder="Test" />
-    </div>
-    <div>
-      <p>Test seite 4</p>
-      <input placeholder="Test" />
-    </div>
-    <div>
-      <p>Test seite 4</p>
-      <input placeholder="Test" />
-    </div>
-  }
+      @case (4) {
+      <div>
+        <p>Test seite 4</p>
+        <input placeholder="Test" />
+      </div>
+      <div>
+        <p>Test seite 4</p>
+        <input placeholder="Test" />
+      </div>
+      <div>
+        <p>Test seite 4</p>
+        <input placeholder="Test" />
+      </div>
+      }
 
   @if (currentStep === 5) {
     <form (ngSubmit)="generateQRCode()">
@@ -111,8 +119,11 @@
   </ng-container>
 </div>
 
-<div class="flex justify-between items-start bottom-0 left-0 right-0 p-6
-[&_button]:bg-violet-600 [&_button]:text-white [&_button]:rounded-md [&_button]:p-3">
-  <button (click)="close()">Close</button>
-  <button (click)="continue()">Continue</button>
+      <div class="flex justify-between items-start bottom-0 left-0 right-0 p-6
+      [&_button]:bg-violet-600 [&_button]:text-white [&_button]:rounded-md [&_button]:p-3">
+        <button (click)="onClose()">Close</button>
+        <button (click)="continue()">Continue</button>
+      </div>
+    </div>
+  </div>
 </div>
