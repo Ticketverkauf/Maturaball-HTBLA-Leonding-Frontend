@@ -99,17 +99,13 @@
   }
 
   @if (currentStep === 5) {
-    <div>
-      <p>Test seite 5</p>
-      <input placeholder="Test" />
-    </div>
-    <div>
-      <p>Test seite 5</p>
-      <input placeholder="Test" />
-    </div>
-    <div>
-      <p>Test seite 5</p>
-      <input placeholder="Test" />
+    <form (ngSubmit)="generateQRCode()">
+      <label for="testdata">Testdata:</label>
+      <input type="text" id="testdata" [(ngModel)]="qrCodeResponse.identifier" name="testdata" required>
+      <button type="submit">Generate Test QR Code</button>
+    </form>
+    <div *ngIf="qrCodeData">
+      <qrcode [qrdata]="qrCodeData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
     </div>
   }
   </ng-container>
