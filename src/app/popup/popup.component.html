@@ -1,7 +1,7 @@
-<div
-  class="p-5bg-gray-200 bg-gray-200 h-full w-full rounded-2xl border-2 border-gray-500 text-gray-900 flex flex-col justify-between items-center">
+<div id="popup"
+  class="p-5bg-gray-200 bg-gray-200 h-full w-full rounded-3xl border-2 border-gray-500 text-gray-900 justify-center">
 
-  <h2 class="p-6 text-3xl font-bold">Buy Ticket</h2>
+  <h2 class="p-6 text-3xl font-bold p-head">Order Your Ticket</h2>
 
   <div class="flex justify-end items-start absolute top-0 right-0 p-6">
     @for (step of [1, 2, 3, 4, 5]; track step) {
@@ -15,7 +15,7 @@
   </div>
 
   <div
-    class="p-6 flex flex-col gap-5
+    class="p-6 flex flex-col gap-5 p-body
   [&_p]:text-gray-700 
     [&_div]:p-1 [&_div]:full-width 
     [&_input]:w-full [&_input]:p-3 [&_input]:rounded-md [&_input]:placeholder-violet-600 [&_input]:bg-violet-100 [&_input]:border [&_input]:border-violet-300">
@@ -121,12 +121,12 @@
       }
 
     </div>
-    <div class="flex justify-evenly items-start bottom-0 left-0 right-0 p-6">
-      <button (click)="continue()"
-        class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 duration-300 transition-all hover:shadow-md">Continue</button>
-      <button (click)="previous()"
-        class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 transition-all duration-300 hover:shadow-md">Go
-        Back</button>
-    </div>
+  </div>
+  <div class="p-footer flex justify-evenly items-center bottom-0 left-0 right-0 p-6 w-full">
+    <button (click)="previous()"
+      class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 transition-all duration-300 hover:shadow-md">Go
+      Back</button>
+    <button (click)="continue()"
+      class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 duration-300 transition-all hover:shadow-md">Continue</button>
   </div>
 </div>
