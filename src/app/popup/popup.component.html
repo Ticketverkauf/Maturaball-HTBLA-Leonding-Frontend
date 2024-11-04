@@ -1,0 +1,211 @@
+<div id="popup"
+  class="p-5bg-gray-200 bg-gray-200 h-full w-full rounded-3xl border-2 border-gray-500 text-gray-900 justify-center z-0">
+
+  <h2 class="p-6 text-3xl font-bold p-head">{{currentHeader[currentStep - 1]}}</h2>
+
+  <div class="flex justify-end items-start absolute top-0 right-0 p-6">
+    @for (step of [1, 2, 3, 4, 5]; track step) {
+    <button (click)="''" [class]="{
+        'bg-violet-500': currentStep === step,
+        'bg-violet-300': currentStep !== step
+      }" class="text-white rounded-full mr-1 w-10 h-10 flex items-center justify-center">
+      {{ step }}
+    </button>
+    }
+  </div>
+
+  <div
+    class="p-6 flex flex-col gap-5 p-body
+  [&_p]:text-gray-700 
+    [&_div]:p-1 [&_div]:full-width 
+    [&_input]:w-full [&_input]:p-3 [&_input]:rounded-md [&_input]:placeholder-violet-600 [&_input]:bg-violet-100 [&_input]:border [&_input]:border-violet-300">
+
+    @switch (currentStep) {
+    @case (1) {
+    <div class="info-grid">
+      <div id="name">
+        <p>Vorname*</p>
+        <input [(ngModel)]="formData.firstname" placeholder="Max" />
+      </div>
+      <div id="last-name">
+        <p>Nachname*</p>
+        <input [(ngModel)]="formData.lastname" placeholder="Mustermann" />
+      </div>
+      <div id="mail">
+        <p>Email-Addresse*</p>
+        <input [(ngModel)]="formData.mailAddress" placeholder="max.m@gmail.com" />
+      </div>
+      <div id="phone">
+        <p>Telefonnummer*</p>
+        <input [(ngModel)]="formData.phoneNumber" placeholder="+43 999999999" />
+      </div>
+      <div id="street">
+        <p>Straße*</p>
+        <input [(ngModel)]="formData.street" placeholder="Limesstraße" />
+      </div>
+      <div id="s-number">
+        <p>Hausnummer*</p>
+        <input [(ngModel)]="formData.streetNumber" placeholder="12-14a" />
+      </div>
+      <div id="city">
+        <p>Stadt*</p>
+        <input [(ngModel)]="formData.town" placeholder="Linz" />
+      </div>
+      <div id="zip">
+        <p>PLZ*</p>
+        <input [(ngModel)]="formData.zipCode" placeholder="4050" />
+      </div>
+      <div id="student">
+        <p>Schüler</p>
+        <input
+          class="flex justify-center items-center w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+          [(ngModel)]="isSchueler" type="checkbox" />
+      </div>
+      <div id="group">
+        <p>Klasse</p>
+        <input [disabled]="!isSchueler()" [(ngModel)]="formData.schoolClass" placeholder="4AHIF"
+          class=" disabled:bg-gray-300 transition-all duration-300 ease-in-out" />
+      </div>
+    </div>
+    }
+
+    @case (2) {
+    <div class="flex flex-col">
+      <p>Only {{ 1700 - bookedTickets() }} Tickets Left!</p>
+      <span class="rounded bg-gray-400 overflow-hidden h-1 flex justify-start">
+        <span [style.width]="(1700 - bookedTickets())/17 + '%'" class="bg-violet-600 h-1">
+        </span>
+      </span>
+    </div>
+
+    <div class="ticket-grid">
+      <div [style.grid-area]="'type1'">
+        <p class="text-center text-xl">Schülerkarten</p>
+      </div>
+
+      <div [style.grid-area]="'type2'">
+        <p class=" text-center text-xl">Externe Karten</p>
+      </div>
+
+      <div [style.grid-area]="'type1s'">
+        <select [(ngModel)]="studentTickets" class=" w-1/3 rounded-lg p-2 focus:outline-violet-500">
+          @for (i of [].constructor(maxTicketPerOrder + 1); track $index) {
+          <option [value]="$index">{{$index}}</option>
+          }
+        </select>
+      </div>
+      <div [style.grid-area]="'type2s'">
+        <select [(ngModel)]="externalTickets" class=" w-1/3 rounded-lg p-2 focus:outline-violet-500">
+          @for (i of [].constructor(maxTicketPerOrder + 1); track $index) {
+          <option [value]="$index">{{$index}}</option>
+          }
+        </select>
+      </div>
+    </div>
+    }
+
+    @case (3) {
+    <div>
+      <p class=" text-xl">Table view not yet implemented</p>
+      <!--
+      <img src="zuckerberg.webp" alt="ticket" />
+      -->
+    </div>
+    <div>
+      <p>Test seite 3</p>
+      <input placeholder="Test" />
+    </div>
+    <div>
+      <p>Test seite 3</p>
+      <input placeholder="Test" />
+    </div>
+    }
+
+    @case (4) {
+    <div class="confirmation-grid w-1/2 justify-self-center self-center rounded-2xl bg-slate-400 shadow-lg">
+      <div [style.grid-area]="'subheader1'">
+        <p class="text-center text-gray-200 text-xl">
+          Ihre Informationen
+        </p>
+      </div>
+      <div [style.grid-area]="'name'">
+        <p class="text-center text-gray-300">
+          {{formData.firstname + " " + formData.lastname + (isSchueler()?" (" + formData.schoolClass +")":"")}}
+        </p>
+      </div>
+      <div [style.grid-area]="'mail'">
+        <p class="text-center text-gray-300">{{formData.mailAddress}}</p>
+      </div>
+      <div [style.grid-area]="'phone'">
+        <p class="text-center text-gray-300">{{formData.phoneNumber}}</p>
+      </div>
+      <div [style.grid-area]="'address'">
+        <p class="text-center text-gray-300">{{formData.street + " " + formData.streetNumber + ", " + formData.zipCode +
+          " " +
+          formData.town}}
+        </p>
+      </div>
+      <div [style.grid-area]="'subheader2'">
+        <p class="text-center text-gray-200 text-xl">
+          Ihre Reservierungen
+        </p>
+      </div>
+
+      <div [style.grid-area]="'ticket1'">
+        <p class="text-center text-gray-300">Schülertickets: {{ studentTickets() }}
+        </p>
+      </div>
+      <div [style.grid-area]="'ticket2'">
+        <p class="text-center text-gray-300">Externe Tickets: {{ externalTickets() }}</p>
+      </div>
+    </div>
+    <div class="flex justify-center items-center w-full h-full">
+      <app-button color="violet" (action)="continue()" name="Confirm and Reservate"
+        class="hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+        [size]="{width: '100%', height: '3rem'}"></app-button>
+    </div>
+    }
+
+    @case (5) {
+    <div class="flex flex-row gap-2 justify-start items-center h-3/4 overflow-auto">
+      @for (ticket of tickets(); track ticket.id) {
+      <div
+        class="rounded-lg bg-gray-200 shadow-lg card-grid justify-center items-center w-52 h-80 hover:scale-105 transition-all duration-300">
+        <h2 class=" text-center">{{ticket.ticketType}} - {{ticket.id.slice(0,5)}}...</h2>
+        <span class=" bg-purple-600 w-full h-1"></span>
+        <div class="rounded-md border-violet-600">
+          <qrcode [qrdata]="generateQRCode(ticket.id)" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="h-1/4 w-full flex justify-center items-center">
+      <button (click)="downloadJSON()"
+        class="bg-violet-600 text-white p-2 text-lg rounded-md hover:scale-105 duration-300 transition-all hover:shadow-md">Download
+        Tickets</button>
+    </div>
+    }
+    }
+
+  </div>
+  <div class="p-footer flex justify-evenly items-center bottom-0 left-0 right-0 p-6 w-full">
+    @if (currentStep === 4) {
+    <button (click)="previous()"
+      class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 transition-all duration-300 hover:shadow-md"> <- Go
+        Back</button>
+        }
+        @else if (currentStep === 5) {
+        <button (click)="onClose()"
+          class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 transition-all duration-300 hover:shadow-md">
+          Close
+        </button>
+        }
+        @else { <button (click)="previous()"
+          class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 transition-all duration-300 hover:shadow-md">Go
+          Back</button>
+        <button (click)="continue()"
+          class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 duration-300 transition-all hover:shadow-md">Continue</button>
+        }
+  </div>
+</div>

@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {ButtonComponent} from '../button/button.component';
+import { PopupComponent } from '../popup/popup.component';
+import { DialogService } from '../dialog.service';
 
 @Component({
   selector: 'app-hero',
@@ -16,4 +18,10 @@ export class HeroComponent {
 
   @Input()
   accentColor: string = 'yellow';
+
+  readonly dialogService = inject(DialogService);
+
+  openDialog(): void {
+    this.dialogService.openDialog(PopupComponent, '80vh', '90vw', true);
+  }
 }
