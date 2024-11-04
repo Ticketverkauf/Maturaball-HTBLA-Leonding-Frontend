@@ -3,6 +3,7 @@ import {HeroComponent} from '../hero/hero.component';
 import {RoutineComponent} from '../routine/routine.component';
 import {PointerArrowComponent} from '../pointer-arrow/pointer-arrow.component';
 import {PictureShowComponent} from '../picture-show/picture-show.component';
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-home',
@@ -11,8 +12,9 @@ import {PictureShowComponent} from '../picture-show/picture-show.component';
     HeroComponent,
     RoutineComponent,
     PointerArrowComponent,
-    PictureShowComponent
-  ],
+    PictureShowComponent,
+    FooterComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

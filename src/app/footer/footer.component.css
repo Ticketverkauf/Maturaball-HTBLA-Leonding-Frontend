@@ -1,0 +1,28 @@
+.footer-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 7fr 1fr;
+  grid-template-areas:
+    "fi no se"
+    "th no fo";
+}
+
+#first {
+  grid-area: fi;
+}
+
+#second {
+  grid-area: se;
+}
+
+#third {
+  grid-area: th;
+}
+
+#fourth {
+  grid-area: fo;
+}
+
+a {
+  cursor: pointer;
+}
