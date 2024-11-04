@@ -3,7 +3,7 @@ name: AutoDeploy
 on: 
   push:
     branches:
-      -main
+      - main
       
 jobs:
   Explore-GitHub-Actions:
