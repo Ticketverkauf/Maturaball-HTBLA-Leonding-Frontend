@@ -1,4 +1,4 @@
-import {Component, Input, input} from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -11,8 +11,8 @@ export class ButtonComponent {
   @Input()
   name :string = "";
 
-  @Input()
-  action :() => void = () => {};
+  @Output()
+  action :EventEmitter<void> = new EventEmitter<void>();
 
   @Input()
   size: {height: string, width: string} = {height: '2.5rem', width: 'auto'};

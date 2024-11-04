@@ -1,0 +1,123 @@
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  margin-top: 10px;
+  grid-template-areas:
+    "info1 info2"
+    "info3 info4"
+    "info5 info6"
+    "info7 info8"
+    "info9 info10";
+}
+
+.ticket-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "type1 type1s"
+    "type2 type2s"
+    "type3 type3s";
+  height: 100%;
+}
+
+.ticket-grid > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "subheader1 subheader1"
+    "name name"
+    "mail mail"
+    "phone phone"
+    "address address"
+    "subheader2 subheader2"
+    "ticket1 ticket1"
+    "ticket2 ticket2";
+}
+
+.card-grid {
+  display: grid;
+  grid-template-rows: 1fr 1fr 10fr;
+}
+
+#name {
+  grid-area: info1;
+}
+
+#last-name {
+  grid-area: info2;
+}
+
+#mail {
+  grid-area: info3;
+}
+
+#phone {
+  grid-area: info4;
+}
+#street {
+  grid-area: info5;
+}
+
+#s-number {
+  grid-area: info6;
+}
+
+#city {
+  grid-area: info7;
+}
+
+#student {
+  grid-area: info9;
+}
+
+#zip {
+  grid-area: info8;
+}
+
+#group {
+  grid-area: info10;
+}
+
+input {
+  transition: all 100ms ease-in-out;
+}
+
+input:focus {
+  outline: none;
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#popup {
+  display: grid;
+  grid-template-areas:
+    "head"
+    "body"
+    "body"
+    "body"
+    "footer";
+  width: 100%;
+  height: 100%;
+  grid-template-rows: auto 1fr 1fr 1fr auto;
+  grid-template-columns: 75%;
+}
+
+.p-head {
+  grid-area: head;
+  text-align: center;
+}
+
+.p-body {
+  grid-area: body;
+}
+
+.p-footer {
+  grid-area: footer;
+}
