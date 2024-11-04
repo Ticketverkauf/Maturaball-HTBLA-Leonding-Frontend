@@ -1,0 +1,15 @@
+name: AutoDeploy
+
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: mraspi
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: npm install
+      - run: ng build
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
