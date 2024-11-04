@@ -4,6 +4,7 @@ import {
   MatDialogRef,
 }
 from '@angular/material/dialog';
+import { ButtonComponent } from "../button/button.component";
 export interface DialogData {
   animal: string;
   name: string;
@@ -13,8 +14,9 @@ export interface DialogData {
   selector: 'app-popup',
   standalone: true,
   imports: [
-   FormsModule,
-  ],
+    FormsModule,
+    ButtonComponent
+],
   templateUrl: './popup.component.html',
   styleUrl: './popup.component.css'
 })
@@ -49,5 +51,12 @@ export class PopupComponent {
 
   onClose() {
     this.dialogRef.close();
+  }
+
+  previous(){
+    this.currentStep--;
+    if(this.currentStep < 1){
+      this.onClose();
+    }
   }
 }

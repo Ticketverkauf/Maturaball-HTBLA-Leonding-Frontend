@@ -15,10 +15,10 @@
   </div>
 
   <div
-    class="p-6 flex flex-col
+    class="p-6 flex flex-col gap-5
   [&_p]:text-gray-700 
     [&_div]:p-1 [&_div]:full-width 
-    [&_input]:w-full [&_input]:p-3 [&_input]:rounded-md [&_input]:placeholder-violet-600 [&_input]:bg-violet-100 [&_input]:border [&_input]:border-violet-300 [&_input]:focus:outline-none [&_input]:focus:ring-2 [&_input]:focus:ring-violet-500">
+    [&_input]:w-full [&_input]:p-3 [&_input]:rounded-md [&_input]:placeholder-violet-600 [&_input]:bg-violet-100 [&_input]:border [&_input]:border-violet-300">
 
     <div class="info-grid">
       @switch (currentStep) {
@@ -47,13 +47,13 @@
         <p>Hausnummer*</p>
         <input [(ngModel)]="formData.nummer" placeholder="12-14a" />
       </div>
-      <div id="zip">
-        <p>PLZ*</p>
-        <input [(ngModel)]="formData.plz" placeholder="4050" />
-      </div>
       <div id="city">
         <p>Stadt*</p>
         <input [(ngModel)]="formData.stadt" placeholder="Linz" />
+      </div>
+      <div id="zip">
+        <p>PLZ*</p>
+        <input [(ngModel)]="formData.plz" placeholder="4050" />
       </div>
       <div id="student">
         <p>Schüler</p>
@@ -62,7 +62,7 @@
           [(ngModel)]="isSchueler" type="checkbox" />
       </div>
       <div id="group">
-        <p>Klasse (optional)</p>
+        <p>Klasse</p>
         <input [disabled]="!isSchueler()" [(ngModel)]="formData.klasse" placeholder="4AHIF"
           class=" disabled:bg-gray-300 transition-all duration-300 ease-in-out" />
       </div>
@@ -124,12 +124,13 @@
       <p>Invalid step</p>
       }
       }
-
-      <div class="flex justify-between items-start bottom-0 left-0 right-0 p-6
-      [&_button]:bg-violet-600 [&_button]:text-white [&_button]:rounded-md [&_button]:p-3">
-        <button (click)="onClose()">Close</button>
-        <button (click)="continue()">Continue</button>
-      </div>
+    </div>
+    <div class="flex justify-evenly items-start bottom-0 left-0 right-0 p-6">
+      <button (click)="continue()"
+        class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 duration-300 transition-all hover:shadow-md">Continue</button>
+      <button (click)="previous()"
+        class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 transition-all duration-300 hover:shadow-md">Go
+        Back</button>
     </div>
   </div>
 </div>
