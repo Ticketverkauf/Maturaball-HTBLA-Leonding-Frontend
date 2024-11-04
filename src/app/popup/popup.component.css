@@ -11,6 +11,22 @@
     "info9 info10";
 }
 
+.ticket-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "type1 type1s"
+    "type2 type2s"
+    "type3 type3s";
+  height: 100%;
+}
+
+.ticket-grid > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #name {
   grid-area: info1;
 }

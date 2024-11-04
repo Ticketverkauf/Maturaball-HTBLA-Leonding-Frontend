@@ -1,7 +1,7 @@
 <div id="popup"
   class="p-5bg-gray-200 bg-gray-200 h-full w-full rounded-3xl border-2 border-gray-500 text-gray-900 justify-center">
 
-  <h2 class="p-6 text-3xl font-bold p-head">Order Your Ticket</h2>
+  <h2 class="p-6 text-3xl font-bold p-head">{{currentHeader[currentStep - 1]}}</h2>
 
   <div class="flex justify-end items-start absolute top-0 right-0 p-6">
     @for (step of [1, 2, 3, 4, 5]; track step) {
@@ -20,9 +20,9 @@
     [&_div]:p-1 [&_div]:full-width 
     [&_input]:w-full [&_input]:p-3 [&_input]:rounded-md [&_input]:placeholder-violet-600 [&_input]:bg-violet-100 [&_input]:border [&_input]:border-violet-300">
 
+    @switch (currentStep) {
+    @case (1) {
     <div class="info-grid">
-      @switch (currentStep) {
-      @case (1) {
       <div id="name">
         <p>Vorname*</p>
         <input [(ngModel)]="formData.vorname" placeholder="Max" />
@@ -66,61 +66,81 @@
         <input [disabled]="!isSchueler()" [(ngModel)]="formData.klasse" placeholder="4AHIF"
           class=" disabled:bg-gray-300 transition-all duration-300 ease-in-out" />
       </div>
-      }
+    </div>
+    }
 
-      @case (2) {
-      <div>
-        <p>Test seite 2</p>
-        <input placeholder="Test" />
+    @case (2) {
+    <div class="flex flex-col">
+      <p>Only {{ 1700 - bookedTickets() }} Tickets Left!</p>
+      <span class="rounded bg-gray-400 overflow-hidden h-1 flex justify-start">
+        <span [style.width]="(1700 - bookedTickets())/17 + '%'" class="bg-violet-600 h-1">
+        </span>
+      </span>
+    </div>
+
+    <div class="ticket-grid">
+      <div [style.grid-area]="'type1'">
+        <p class="text-center text-xl">Schülerkarten</p>
       </div>
+
+      <div [style.grid-area]="'type2'">
+        <p class=" text-center text-xl">Externe Karten</p>
+      </div>
+
+      <div [style.grid-area]="'type1s'">
+        <select [(ngModel)]="studentTickets" class=" w-1/3 rounded-lg p-2 focus:outline-violet-500">
+          @for (i of [].constructor(maxTicketPerOrder + 1); track $index) {
+          <option [value]="$index">{{$index}}</option>
+          }
+        </select>
+      </div>
+      <div [style.grid-area]="'type2s'">
+        <select [(ngModel)]="externalTickets" class=" w-1/3 rounded-lg p-2 focus:outline-violet-500">
+          @for (i of [].constructor(maxTicketPerOrder + 1); track $index) {
+          <option [value]="$index">{{$index}}</option>
+          }
+        </select>
+      </div>
+    </div>
+    }
+
+    @case (3) {
+    <div>
+      <p class=" text-xl">Table view not yet implemented</p>
+      <!--
       <img src="zuckerberg.webp" alt="ticket" />
-      }
+      -->
+    </div>
+    <div>
+      <p>Test seite 3</p>
+      <input placeholder="Test" />
+    </div>
+    <div>
+      <p>Test seite 3</p>
+      <input placeholder="Test" />
+    </div>
+    }
 
-      @case (3) {
-      <div>
-        <p>Test seite 3</p>
-        <input placeholder="Test" />
-      </div>
-      <div>
-        <p>Test seite 3</p>
-        <input placeholder="Test" />
-      </div>
-      <div>
-        <p>Test seite 3</p>
-        <input placeholder="Test" />
-      </div>
-      }
-
-      @case (4) {
-      <div>
-        <p>Test seite 4</p>
-        <input placeholder="Test" />
-      </div>
-      <div>
-        <p>Test seite 4</p>
-        <input placeholder="Test" />
-      </div>
-      <div>
-        <p>Test seite 4</p>
-        <input placeholder="Test" />
-      </div>
-      }
-
-      @case (5) {
-      <form (ngSubmit)="generateQRCode()">
-        <label for="testdata">Testdata:</label>
-        <input type="text" id="testdata" [(ngModel)]="qrCodeResponse.identifier" name="testdata" required>
-        <button type="submit">Generate Test QR Code</button>
-      </form>
-      <div>
-        @if (qrCodeData) {
-        <qrcode [qrdata]="qrCodeData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-        }
-      </div>
-      }
-      }
+    @case (4) {
+    <div class="confirmation-grid">
 
     </div>
+    }
+
+    @case (5) {
+    <form (ngSubmit)="generateQRCode()">
+      <label for="testdata">Testdata:</label>
+      <input type="text" id="testdata" [(ngModel)]="qrCodeResponse.identifier" name="testdata" required>
+      <button type="submit">Generate Test QR Code</button>
+    </form>
+    <div>
+      @if (qrCodeData) {
+      <qrcode [qrdata]="qrCodeData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+      }
+    </div>
+    }
+    }
+
   </div>
   <div class="p-footer flex justify-evenly items-center bottom-0 left-0 right-0 p-6 w-full">
     <button (click)="previous()"
