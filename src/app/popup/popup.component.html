@@ -1,11 +1,11 @@
 <div id="popup"
-  class="p-5bg-gray-200 bg-gray-200 h-full w-full rounded-3xl border-2 border-gray-500 text-gray-900 justify-center">
+  class="p-5bg-gray-200 bg-gray-200 h-full w-full rounded-3xl border-2 border-gray-500 text-gray-900 justify-center z-0">
 
   <h2 class="p-6 text-3xl font-bold p-head">{{currentHeader[currentStep - 1]}}</h2>
 
   <div class="flex justify-end items-start absolute top-0 right-0 p-6">
     @for (step of [1, 2, 3, 4, 5]; track step) {
-    <button (click)="setStep(step)" [class]="{
+    <button (click)="''" [class]="{
         'bg-violet-500': currentStep === step,
         'bg-violet-300': currentStep !== step
       }" class="text-white rounded-full mr-1 w-10 h-10 flex items-center justify-center">
@@ -122,8 +122,46 @@
     }
 
     @case (4) {
-    <div class="confirmation-grid">
+    <div class="confirmation-grid w-1/2 justify-self-center self-center rounded-2xl bg-slate-400 shadow-lg">
+      <div [style.grid-area]="'subheader1'">
+        <p class="text-center text-gray-200 text-xl">
+          Ihre Informationen
+        </p>
+      </div>
+      <div [style.grid-area]="'name'">
+        <p class="text-center text-gray-300">
+          {{formData.vorname + " " + formData.nachname + (isSchueler()?" (" + formData.klasse +")":"")}}
+        </p>
+      </div>
+      <div [style.grid-area]="'mail'">
+        <p class="text-center text-gray-300">{{formData.email}}</p>
+      </div>
+      <div [style.grid-area]="'phone'">
+        <p class="text-center text-gray-300">{{formData.telefonnummer}}</p>
+      </div>
+      <div [style.grid-area]="'address'">
+        <p class="text-center text-gray-300">{{formData.strasse + " " + formData.nummer + ", " + formData.plz + " " +
+          formData.stadt}}
+        </p>
+      </div>
+      <div [style.grid-area]="'subheader2'">
+        <p class="text-center text-gray-200 text-xl">
+          Ihre Reservierungen
+        </p>
+      </div>
 
+      <div [style.grid-area]="'ticket1'">
+        <p class="text-center text-gray-300">Schülertickets: {{ studentTickets() }}
+        </p>
+      </div>
+      <div [style.grid-area]="'ticket2'">
+        <p class="text-center text-gray-300">Externe Tickets: {{ externalTickets() }}</p>
+      </div>
+    </div>
+    <div class="flex justify-center items-center w-full h-full">
+      <app-button color="violet" (action)="continue()" name="Confirm and Reservate"
+        class="hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+        [size]="{width: '100%', height: '3rem'}"></app-button>
     </div>
     }
 
@@ -143,10 +181,22 @@
 
   </div>
   <div class="p-footer flex justify-evenly items-center bottom-0 left-0 right-0 p-6 w-full">
+    @if (currentStep === 4) {
     <button (click)="previous()"
-      class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 transition-all duration-300 hover:shadow-md">Go
-      Back</button>
-    <button (click)="continue()"
-      class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 duration-300 transition-all hover:shadow-md">Continue</button>
+      class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 transition-all duration-300 hover:shadow-md"> <- Go
+        Back</button>
+        }
+        @else if (currentStep === 5) {
+        <button (click)="onClose()"
+          class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 transition-all duration-300 hover:shadow-md">
+          Close
+        </button>
+        }
+        @else { <button (click)="previous()"
+          class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 transition-all duration-300 hover:shadow-md">Go
+          Back</button>
+        <button (click)="continue()"
+          class="bg-violet-600 text-white p-2 rounded-md hover:scale-105 duration-300 transition-all hover:shadow-md">Continue</button>
+        }
   </div>
 </div>

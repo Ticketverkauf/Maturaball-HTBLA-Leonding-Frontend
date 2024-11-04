@@ -22,8 +22,9 @@ export interface DialogData {
   styleUrl: './popup.component.css',
   imports: [
     FormsModule,
-    QRCodeModule
-  ]
+    QRCodeModule,
+    ButtonComponent
+]
 })
 
 export class PopupComponent {
@@ -68,7 +69,7 @@ export class PopupComponent {
 
   currentStep: number = 1;
 
-  currentHeader: string[] = ["Insert Personal Information", "Select Tickets", "Select Tables", "Confirm Information", "Your Ticket"]
+  currentHeader: string[] = ["Insert Personal Information", "Select Tickets", "Select Tables", "Confirm Information", "Your Tickets"]
 
   continue() {
     this.currentStep++;

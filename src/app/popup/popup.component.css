@@ -27,6 +27,20 @@
   align-items: center;
 }
 
+.confirmation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "subheader1 subheader1"
+    "name name"
+    "mail mail"
+    "phone phone"
+    "address address"
+    "subheader2 subheader2"
+    "ticket1 ticket1"
+    "ticket2 ticket2";
+}
+
 #name {
   grid-area: info1;
 }
