@@ -41,6 +41,11 @@
     "ticket2 ticket2";
 }
 
+.card-grid {
+  display: grid;
+  grid-template-rows: 1fr 1fr 10fr;
+}
+
 #name {
   grid-area: info1;
 }

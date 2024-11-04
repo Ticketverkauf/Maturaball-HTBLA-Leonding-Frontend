@@ -25,35 +25,35 @@
     <div class="info-grid">
       <div id="name">
         <p>Vorname*</p>
-        <input [(ngModel)]="formData.vorname" placeholder="Max" />
+        <input [(ngModel)]="formData.firstname" placeholder="Max" />
       </div>
       <div id="last-name">
         <p>Nachname*</p>
-        <input [(ngModel)]="formData.nachname" placeholder="Mustermann" />
+        <input [(ngModel)]="formData.lastname" placeholder="Mustermann" />
       </div>
       <div id="mail">
         <p>Email-Addresse*</p>
-        <input [(ngModel)]="formData.email" placeholder="max.m@gmail.com" />
+        <input [(ngModel)]="formData.mailAddress" placeholder="max.m@gmail.com" />
       </div>
       <div id="phone">
         <p>Telefonnummer*</p>
-        <input [(ngModel)]="formData.telefonnummer" placeholder="+43 999999999" />
+        <input [(ngModel)]="formData.phoneNumber" placeholder="+43 999999999" />
       </div>
       <div id="street">
         <p>Straße*</p>
-        <input [(ngModel)]="formData.strasse" placeholder="Limesstraße" />
+        <input [(ngModel)]="formData.street" placeholder="Limesstraße" />
       </div>
       <div id="s-number">
         <p>Hausnummer*</p>
-        <input [(ngModel)]="formData.nummer" placeholder="12-14a" />
+        <input [(ngModel)]="formData.streetNumber" placeholder="12-14a" />
       </div>
       <div id="city">
         <p>Stadt*</p>
-        <input [(ngModel)]="formData.stadt" placeholder="Linz" />
+        <input [(ngModel)]="formData.town" placeholder="Linz" />
       </div>
       <div id="zip">
         <p>PLZ*</p>
-        <input [(ngModel)]="formData.plz" placeholder="4050" />
+        <input [(ngModel)]="formData.zipCode" placeholder="4050" />
       </div>
       <div id="student">
         <p>Schüler</p>
@@ -63,7 +63,7 @@
       </div>
       <div id="group">
         <p>Klasse</p>
-        <input [disabled]="!isSchueler()" [(ngModel)]="formData.klasse" placeholder="4AHIF"
+        <input [disabled]="!isSchueler()" [(ngModel)]="formData.schoolClass" placeholder="4AHIF"
           class=" disabled:bg-gray-300 transition-all duration-300 ease-in-out" />
       </div>
     </div>
@@ -130,18 +130,19 @@
       </div>
       <div [style.grid-area]="'name'">
         <p class="text-center text-gray-300">
-          {{formData.vorname + " " + formData.nachname + (isSchueler()?" (" + formData.klasse +")":"")}}
+          {{formData.firstname + " " + formData.lastname + (isSchueler()?" (" + formData.schoolClass +")":"")}}
         </p>
       </div>
       <div [style.grid-area]="'mail'">
-        <p class="text-center text-gray-300">{{formData.email}}</p>
+        <p class="text-center text-gray-300">{{formData.mailAddress}}</p>
       </div>
       <div [style.grid-area]="'phone'">
-        <p class="text-center text-gray-300">{{formData.telefonnummer}}</p>
+        <p class="text-center text-gray-300">{{formData.phoneNumber}}</p>
       </div>
       <div [style.grid-area]="'address'">
-        <p class="text-center text-gray-300">{{formData.strasse + " " + formData.nummer + ", " + formData.plz + " " +
-          formData.stadt}}
+        <p class="text-center text-gray-300">{{formData.street + " " + formData.streetNumber + ", " + formData.zipCode +
+          " " +
+          formData.town}}
         </p>
       </div>
       <div [style.grid-area]="'subheader2'">
@@ -166,15 +167,23 @@
     }
 
     @case (5) {
-    <form (ngSubmit)="generateQRCode()">
-      <label for="testdata">Testdata:</label>
-      <input type="text" id="testdata" [(ngModel)]="qrCodeResponse.identifier" name="testdata" required>
-      <button type="submit">Generate Test QR Code</button>
-    </form>
-    <div>
-      @if (qrCodeData) {
-      <qrcode [qrdata]="qrCodeData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    <div class="flex flex-row gap-2 justify-start items-center h-3/4 overflow-auto">
+      @for (ticket of tickets(); track ticket.id) {
+      <div
+        class="rounded-lg bg-gray-200 shadow-lg card-grid justify-center items-center w-52 h-80 hover:scale-105 transition-all duration-300">
+        <h2 class=" text-center">{{ticket.ticketType}} - {{ticket.id.slice(0,5)}}...</h2>
+        <span class=" bg-purple-600 w-full h-1"></span>
+        <div class="rounded-md border-violet-600">
+          <qrcode [qrdata]="generateQRCode(ticket.id)" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+        </div>
+      </div>
       }
+    </div>
+
+    <div class="h-1/4 w-full flex justify-center items-center">
+      <button (click)="downloadJSON()"
+        class="bg-violet-600 text-white p-2 text-lg rounded-md hover:scale-105 duration-300 transition-all hover:shadow-md">Download
+        Tickets</button>
     </div>
     }
     }

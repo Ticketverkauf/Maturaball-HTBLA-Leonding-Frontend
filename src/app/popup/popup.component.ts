@@ -9,7 +9,7 @@ import {
 }
 from '@angular/material/dialog';
 import { ButtonComponent } from "../button/button.component";
-import { TicketService } from '../ticket.service';
+import { PersonalInformation, Ticket, TicketService } from '../ticket.service';
 export interface DialogData {
   animal: string;
   name: string;
@@ -32,6 +32,8 @@ export class PopupComponent {
     this.init() 
   }
 
+  tickets = signal<Ticket[]>([])
+
   async init(){
     this.bookedTickets.set(await this.ticketService.getBookedTickets())
   }
@@ -44,25 +46,21 @@ export class PopupComponent {
 
   maxTicketPerOrder = 6
 
-  formData = {
-    vorname: '',
-    nachname: '',
-    email: '',
-    telefonnummer: '',
-    strasse: '',
-    nummer: '',
-    plz: '',
-    stadt: '',
-    klasse: ''
-  };
+  formData : PersonalInformation = {
+    firstname: "",
+    lastname: "",
+    mailAddress: "",
+    phoneNumber: "",
+    schoolClass: "",
+    isMale: true,
+    street: "",
+    streetNumber: "",
+    zipCode: "",
+    town: ""
+  }
 
-  qrCodeResponse = {
-    identifier: ''
-  };
-
-  qrCodeData: string | null = null;
-  generateQRCode() {
-    this.qrCodeData = `MECARD:N:${this.qrCodeResponse.identifier};;`;
+  generateQRCode(param: string) {
+    return `MECARD:N:${param};;`;
   }
 
   bookedTickets = signal<number>(0)
@@ -73,9 +71,16 @@ export class PopupComponent {
 
   continue() {
     this.currentStep++;
-    if(this.currentStep > 5) {
+    if(this.currentStep === 5){
+      this.bookTickets();
+    }
+    else if(this.currentStep > 5) {
       this.onClose();
     }
+  }
+
+  async bookTickets(){
+    this.tickets.set(await this.ticketService.bookTickets(this.formData, {externalTicketCount: this.externalTickets(), studentTicketCount: this.studentTickets()}))    
   }
 
   setStep(step: number) {
@@ -91,5 +96,17 @@ export class PopupComponent {
     if(this.currentStep < 1){
       this.onClose();
     }
+  }
+
+  downloadJSON(){
+    const blob = new Blob([JSON.stringify(this.tickets())], {type: "application/json"});
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "HTBLALeonding-Maturaball-Tickets.json"
+
+    link.click();
+
+    URL.revokeObjectURL(link.href);
   }
 }
