@@ -1,7 +1,11 @@
 import {Component, inject, model, signal} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, NgModel} from '@angular/forms';
+import {CommonModule, NgIf} from '@angular/common';
+import { QRCodeModule } from 'angularx-qrcode';
+
 import {
-  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialogRef
 }
 from '@angular/material/dialog';
 import { ButtonComponent } from "../button/button.component";
@@ -13,13 +17,14 @@ export interface DialogData {
 @Component({
   selector: 'app-popup',
   standalone: true,
+  templateUrl: './popup.component.html',
+  styleUrl: './popup.component.css',
   imports: [
     FormsModule,
-    ButtonComponent
-],
-  templateUrl: './popup.component.html',
-  styleUrl: './popup.component.css'
+    QRCodeModule
+  ]
 })
+
 export class PopupComponent {
   constructor(public dialogRef: MatDialogRef<PopupComponent>){}
 
@@ -36,6 +41,17 @@ export class PopupComponent {
     stadt: '',
     klasse: ''
   };
+
+  qrCodeResponse = {
+    identifier: ''
+  };
+  
+  qrCodeData: string | null = null;
+  generateQRCode() {
+    this.qrCodeData = `MECARD:N:${this.qrCodeResponse.identifier};;`;
+  }
+
+
   currentStep: number = 1;
 
   continue() {

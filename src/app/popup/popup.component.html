@@ -107,23 +107,19 @@
       }
 
       @case (5) {
+      <form (ngSubmit)="generateQRCode()">
+        <label for="testdata">Testdata:</label>
+        <input type="text" id="testdata" [(ngModel)]="qrCodeResponse.identifier" name="testdata" required>
+        <button type="submit">Generate Test QR Code</button>
+      </form>
       <div>
-        <p>Test seite 5</p>
-        <input placeholder="Test" />
-      </div>
-      <div>
-        <p>Test seite 5</p>
-        <input placeholder="Test" />
-      </div>
-      <div>
-        <p>Test seite 5</p>
-        <input placeholder="Test" />
+        @if (qrCodeData) {
+        <qrcode [qrdata]="qrCodeData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        }
       </div>
       }
-      @default {
-      <p>Invalid step</p>
       }
-      }
+
     </div>
     <div class="flex justify-evenly items-start bottom-0 left-0 right-0 p-6">
       <button (click)="continue()"
