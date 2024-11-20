@@ -9,12 +9,8 @@ import {
 }
 from '@angular/material/dialog';
 import { ButtonComponent } from "../button/button.component";
-import { PersonalInformation, Ticket, TicketService } from '../ticket.service';
+import { PersonalInformation, Table, RoomImage, Ticket, TicketService } from '../ticket.service';
 import { KeycloakService } from 'keycloak-angular';
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-popup',
@@ -41,8 +37,21 @@ export class PopupComponent {
   }
 
   tickets = signal<Ticket[]>([])
+  table = signal('');
+  tableoptions = signal<Table[]>([]);
+  tableSrc = signal('BilderSaal.png');
+  tableImageList : RoomImage[] = [
+    {name: 'BilderSaal', src: 'BilderSaal.png'},
+    {name: 'BilderSaalGalerie', src: 'BilderSaalGalerie.png'},
+    {name: 'FestSaalGalerie', src: 'FestSaalGalerie.png'},
+    {name: 'GelberSaal', src: 'GelberSaal.png'},
+    {name: 'RoterSaal', src: 'RoterSaal.png'},
+  ]
 
   async init(){
+    this.tableoptions.set(await this.ticketService.getAllTables());
+    console.log(this.tableoptions());
+
     this.isLoggedIn.set(await this.keycloakService.isLoggedIn());
 
     if(this.isLoggedIn()){

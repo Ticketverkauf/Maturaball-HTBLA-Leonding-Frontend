@@ -101,18 +101,27 @@
 
     @case (3) {
     <div>
-      <p class=" text-xl">Table view not yet implemented</p>
-      <!--
-      <img src="zuckerberg.webp" alt="ticket" />
-      -->
+      <p class=" text-xl">Tische kaufen</p>
     </div>
     <div>
-      <p>Test seite 3</p>
-      <input placeholder="Test" />
-    </div>
-    <div>
-      <p>Test seite 3</p>
-      <input placeholder="Test" />
+      <div>
+        <label for="tables">Wählen die den Tisch aus, welchen Sie kaufen möchten: </label>
+        <select id="table" [(ngModel)]="table">
+          @for(table of tableoptions(); track table) {
+            <option [value]="table">{{ table.name + " in " + table.location }}</option>
+          }
+        </select>
+      </div>
+      <div>
+
+        <label for="tableImage">Raum anschauen: </label>
+        <select id="tableImage" [(ngModel)]="tableSrc">
+          @for(tableImage of tableImageList; track tableImage.src) {
+            <option [value]="tableImage.src">{{ tableImage.name }}</option>
+          }
+        </select>
+        <img [src]="tableSrc()" alt="tableImage"/>
+      </div>
     </div>
     }
 

@@ -26,6 +26,11 @@ export type PersonalInformation = {
   town: string;
 }
 
+export type RoomImage = {
+  name: string;
+  src: string;
+}
+
 export type TicketInformation = {
   externalTicketCount : number;
   studentTicketCount : number;
@@ -46,8 +51,17 @@ export class TicketService {
 
   constructor(private httpClient :HttpClient) { }
 
-  async getAllTables(){
+  async getAllTables() {
+    return [
+      { name: 'Tisch 1', location: 'Raum A' },
+      { name: 'Tisch 2', location: 'Raum A' },
+      { name: 'Tisch 3', location: 'Raum A' },
+      { name: 'Tisch 4', location: 'Raum B' },
+      { name: 'Tisch 5', location: 'Raum C' }
+    ]
+    /*
     return await firstValueFrom<Table[]>(this.httpClient.get<Table[]>(TicketService.URI + "tables"))
+    */
   }
   
   async getBookedTickets(){
