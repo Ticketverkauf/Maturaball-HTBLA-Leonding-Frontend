@@ -25,11 +25,11 @@
     <div class="info-grid">
       <div id="name">
         <p>Vorname*</p>
-        <input class="disabled:bg-slate-200 disabled:cursor-not-allowed disabled:text-slate-500" [disabled]="isLoggedIn()" [(ngModel)]="formData.firstname" placeholder="Max" />
+        <input class="disabled:bg-slate-200 disabled:cursor-not-allowed disabled:text-slate-500" [disabled]="isLoggedIn()" [(ngModel)]="formData.firstName" placeholder="Max" />
       </div>
       <div id="last-name">
         <p>Nachname*</p>
-        <input class="disabled:bg-slate-200 disabled:cursor-not-allowed disabled:text-slate-500" [disabled]="isLoggedIn()" [(ngModel)]="formData.lastname" placeholder="Mustermann" />
+        <input class="disabled:bg-slate-200 disabled:cursor-not-allowed disabled:text-slate-500" [disabled]="isLoggedIn()" [(ngModel)]="formData.lastName" placeholder="Mustermann" />
       </div>
       <div id="mail">
         <p>Email-Addresse*</p>
@@ -125,7 +125,7 @@
       </div>
       <div [style.grid-area]="'name'">
         <p class="text-center text-gray-300">
-          {{formData.firstname + " " + formData.lastname + (isSchueler()?" (" + formData.schoolClass +")":"")}}
+          {{formData.firstName + " " + formData.lastName + (isSchueler()?" (" + formData.schoolClass +")":"")}}
         </p>
       </div>
       <div [style.grid-area]="'mail'">

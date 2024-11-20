@@ -14,8 +14,8 @@ export type Ticket = {
 }
 
 export type PersonalInformation = {
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   mailAddress: string;
   phoneNumber: string;
   schoolClass: string;
@@ -26,14 +26,9 @@ export type PersonalInformation = {
   town: string;
 }
 
-export type TicketInformation = {
-  externalTicketCount : number;
-  studentTicketCount : number;
-}
-
 type OrderRequest = {
   customer: PersonalInformation
-  tickets: TicketInformation
+  tickets: ('STUDENT' | 'EXTERNAL')[]
   table: any
 }
 
@@ -54,13 +49,13 @@ export class TicketService {
     return await firstValueFrom<number>(this.httpClient.get<number>(TicketService.URI + "booked-tickets"))
   }
 
-  async bookTickets(customer : PersonalInformation, tickets: TicketInformation){
+  async bookTickets(customer : PersonalInformation, tickets: ('STUDENT' | 'EXTERNAL')[]){
     const reqBody:OrderRequest = {
       customer: customer,
       tickets: tickets,
       table: null
     };
-    return await firstValueFrom<Ticket[]>(this.httpClient.post<Ticket[]>(TicketService.URI + "book/1", JSON.stringify(reqBody), {
+    return await firstValueFrom<Ticket[]>(this.httpClient.post<Ticket[]>(TicketService.URI + "book", JSON.stringify(reqBody), {
       headers: {
         "Content-Type": "application/json",
         "accept": "*/*"

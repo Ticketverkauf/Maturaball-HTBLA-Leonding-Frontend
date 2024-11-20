@@ -49,8 +49,8 @@ export class PopupComponent {
       console.log(this.keycloakService);
       console.log(this.keycloakService.getUserRoles());
       const userProfile = await this.keycloakService.loadUserProfile();
-      this.formData.firstname = userProfile.firstName!;
-      this.formData.lastname = userProfile.lastName!;
+      this.formData.firstName = userProfile.firstName!;
+      this.formData.lastName = userProfile.lastName!;
       this.formData.mailAddress = userProfile.email!;
       console.log(userProfile);
     }
@@ -66,8 +66,8 @@ export class PopupComponent {
   maxTicketPerOrder = 6
 
   formData : PersonalInformation = {
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     mailAddress: "",
     phoneNumber: "",
     schoolClass: "",
@@ -99,7 +99,17 @@ export class PopupComponent {
   }
 
   async bookTickets(){
-    this.tickets.set(await this.ticketService.bookTickets(this.formData, {externalTicketCount: this.externalTickets(), studentTicketCount: this.studentTickets()}))    
+    const ticket: ('STUDENT' | 'EXTERNAL')[] = [];
+
+    for (let index = 0; index < this.externalTickets(); index++) {
+      ticket.push('EXTERNAL');
+    }
+
+    for (let index = 0; index < this.studentTickets(); index++) {
+      ticket.push('STUDENT');
+    }
+
+    this.tickets.set(await this.ticketService.bookTickets(this.formData, ticket))    
   }
 
   setStep(step: number) {
