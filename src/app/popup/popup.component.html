@@ -25,15 +25,15 @@
     <div class="info-grid">
       <div id="name">
         <p>Vorname*</p>
-        <input [(ngModel)]="formData.firstname" placeholder="Max" />
+        <input class="disabled:bg-slate-200 disabled:cursor-not-allowed disabled:text-slate-500" [disabled]="isLoggedIn()" [(ngModel)]="formData.firstname" placeholder="Max" />
       </div>
       <div id="last-name">
         <p>Nachname*</p>
-        <input [(ngModel)]="formData.lastname" placeholder="Mustermann" />
+        <input class="disabled:bg-slate-200 disabled:cursor-not-allowed disabled:text-slate-500" [disabled]="isLoggedIn()" [(ngModel)]="formData.lastname" placeholder="Mustermann" />
       </div>
       <div id="mail">
         <p>Email-Addresse*</p>
-        <input [(ngModel)]="formData.mailAddress" placeholder="max.m@gmail.com" />
+        <input class="disabled:bg-slate-200 disabled:cursor-not-allowed disabled:text-slate-500" [disabled]="isLoggedIn()" [(ngModel)]="formData.mailAddress" placeholder="max.m@gmail.com" />
       </div>
       <div id="phone">
         <p>Telefonnummer*</p>
@@ -55,17 +55,12 @@
         <p>PLZ*</p>
         <input [(ngModel)]="formData.zipCode" placeholder="4050" />
       </div>
-      <div id="student">
-        <p>Schüler</p>
-        <input
-          class="flex justify-center items-center w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
-          [(ngModel)]="isSchueler" type="checkbox" />
+      @if (!isLoggedIn()) {
+      <div id="student-login" class="flex flex-col justify-center gap-2 items-center">
+        <p class="p-5 text-xl">Sind Sie ein Schüler?</p>
+        <button (click)="login()" class="p-2 shadow-md bg-purple-600 rounded text-white transition-all duration-300 hover:scale-105 hover:shadow-lg">Als Schüler Fortfahren</button>
       </div>
-      <div id="group">
-        <p>Klasse</p>
-        <input [disabled]="!isSchueler()" [(ngModel)]="formData.schoolClass" placeholder="4AHIF"
-          class=" disabled:bg-gray-300 transition-all duration-300 ease-in-out" />
-      </div>
+      }
     </div>
     }
 

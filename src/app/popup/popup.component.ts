@@ -10,6 +10,7 @@ import {
 from '@angular/material/dialog';
 import { ButtonComponent } from "../button/button.component";
 import { PersonalInformation, Ticket, TicketService } from '../ticket.service';
+import { KeycloakService } from 'keycloak-angular';
 export interface DialogData {
   animal: string;
   name: string;
@@ -28,14 +29,32 @@ export interface DialogData {
 })
 
 export class PopupComponent {
-  constructor(public dialogRef: MatDialogRef<PopupComponent>, private ticketService : TicketService){
+  login() {
+    console.log("login");
+    this.keycloakService.login();
+  }
+
+  isLoggedIn = signal<boolean>(false);
+
+  constructor(public dialogRef: MatDialogRef<PopupComponent>, private ticketService : TicketService, private keycloakService: KeycloakService) {
     this.init() 
   }
 
   tickets = signal<Ticket[]>([])
 
   async init(){
-    this.bookedTickets.set(await this.ticketService.getBookedTickets())
+    this.isLoggedIn.set(await this.keycloakService.isLoggedIn());
+
+    if(this.isLoggedIn()){
+      console.log(this.keycloakService);
+      console.log(this.keycloakService.getUserRoles());
+      const userProfile = await this.keycloakService.loadUserProfile();
+      this.formData.firstname = userProfile.firstName!;
+      this.formData.lastname = userProfile.lastName!;
+      this.formData.mailAddress = userProfile.email!;
+      console.log(userProfile);
+    }
+    this.bookedTickets.set(await this.ticketService.getBookedTickets());
   }
 
   isSchueler = signal<boolean>(false);
@@ -63,7 +82,7 @@ export class PopupComponent {
     return `MECARD:N:${param};;`;
   }
 
-  bookedTickets = signal<number>(0)
+  bookedTickets = signal<number>(0);
 
   currentStep: number = 1;
 

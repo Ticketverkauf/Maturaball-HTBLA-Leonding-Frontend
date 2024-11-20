@@ -8,7 +8,8 @@
     "info3 info4"
     "info5 info6"
     "info7 info8"
-    "info9 info10";
+    "info9 info9"
+    "info9 info9";
 }
 
 .ticket-grid {
@@ -25,20 +26,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.confirmation-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    "subheader1 subheader1"
-    "name name"
-    "mail mail"
-    "phone phone"
-    "address address"
-    "subheader2 subheader2"
-    "ticket1 ticket1"
-    "ticket2 ticket2";
 }
 
 .card-grid {
@@ -73,16 +60,12 @@
   grid-area: info7;
 }
 
-#student {
-  grid-area: info9;
-}
-
 #zip {
   grid-area: info8;
 }
 
-#group {
-  grid-area: info10;
+#student-login{
+  grid-area: info9;
 }
 
 input {

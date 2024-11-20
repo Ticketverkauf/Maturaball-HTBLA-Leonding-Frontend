@@ -41,7 +41,8 @@ type OrderRequest = {
   providedIn: 'root'
 })
 export class TicketService {
-  public static URI : string = "https://maturaball.shop/api/v1/reservation/"
+  // public static URI : string = "https://maturaball.shop/api/v1/reservation/"
+  public static URI : string = "http://localhost:8080/api/v1/reservation/"
 
   constructor(private httpClient :HttpClient) { }
 
